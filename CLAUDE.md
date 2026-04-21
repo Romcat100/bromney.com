@@ -11,8 +11,8 @@ that should go through the `<Image />` pipeline live in `src/assets/`. Never
 hardcode a URL to anything under `src/assets/` — it gets content-hashed.
 
 **`dist/` is gitignored.** It's a build artifact. Don't commit it. The
-previous static HTML/CSS version of the site lives in git history only; if
-you ever need to reference it, use `git log` or check out an earlier commit.
+repo's git history starts at the Astro rewrite; the pre-Astro static
+HTML/CSS version is not in this repo.
 
 **Deploys go through Cloudflare Pages, connected to GitHub.** Every push to
 `master` deploys; PRs get preview URLs. Build command is `npm run build`,
@@ -24,6 +24,14 @@ serves it for unknown paths. If you rename or remove the file, Pages will
 fall back to a plain default, so keep it in place. The page reuses
 `Base.astro`, owns its own `<main id="main">` for the skip link, and keeps
 the Plein Air palette so it reads as part of the site.
+
+**Security headers live in `public/_headers`.** Cloudflare Pages reads that
+file and applies the listed headers to every response. The CSP is
+deliberately tight — same-origin only, no external hosts. If a future
+change needs an external asset (a hosted font, a Substack widget, any
+iframe), the CSP in `_headers` must be loosened to match, or the browser
+will block it at runtime. The cache rules in the same file give hashed
+`/_astro/*` assets `immutable` and HTML files `must-revalidate`.
 
 ## Hard design rules
 
