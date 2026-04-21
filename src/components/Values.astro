@@ -1,0 +1,93 @@
+---
+---
+
+<section class="values" aria-labelledby="values-heading" id="values">
+  <div class="wrap values-grid">
+    <div class="values-head">
+      <p class="eyebrow">What I care about</p>
+      <h2 id="values-heading">The question I keep coming&nbsp;back&nbsp;to.</h2>
+    </div>
+
+    <div class="values-body prose">
+      <p class="opening">
+        How do we reduce suffering in the world, and where are we not looking?
+      </p>
+      <p>
+        Factory farming sits near the center of it for me. The scale is hard to look at directly, and almost none of our attention goes there. Most of my donations and the direction I hope to steer my career follow from that concern. I'm also working to extend my healthspan, largely so I can remain helpful to the beings who don't have a voice in the systems shaping their lives.
+      </p>
+      <p>
+        Underneath all of it is Vipassana meditation, every morning and evening. It's something of a compassion amplifier for me, and it keeps me honest about paying attention, which seems to be where everything else starts.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .values {
+    padding-block: var(--section-y);
+    background: var(--linen-warm);
+    position: relative;
+  }
+
+  /* Hair-line top border in warm amber for a quiet section delineation */
+  .values::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(60rem, 90%);
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in srgb, var(--amber) 55%, transparent) 20%,
+      color-mix(in srgb, var(--amber) 55%, transparent) 80%,
+      transparent
+    );
+  }
+
+  .values-grid {
+    display: grid;
+    gap: clamp(1.75rem, 3vw, 2.5rem);
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .values-grid {
+      grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+      gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+  }
+
+  .values-head h2 {
+    margin: 0;
+    font-weight: 360;
+    font-variation-settings: "opsz" 96, "SOFT" 70;
+    font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.125rem);
+  }
+
+  .opening {
+    font-family: var(--font-display);
+    font-size: var(--fs-lead);
+    font-weight: 340;
+    font-style: italic;
+    font-variation-settings: "opsz" 48;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 50ch;
+    margin-bottom: var(--sp-6);
+  }
+
+
+  .values-body p {
+    color: var(--ink-soft);
+    line-height: 1.65;
+    max-width: 60ch;
+  }
+
+  .values-body p + p {
+    margin-top: var(--sp-5);
+  }
+</style>

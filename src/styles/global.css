@@ -1,0 +1,254 @@
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/newsreader";
+@import "@fontsource-variable/jetbrains-mono";
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--linen);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  /* Subtle paper warmth: a very faint warm radial that fades toward the bottom.
+     Too light to read as "a gradient"; just keeps the page from feeling flat. */
+  background-image:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(255, 230, 195, 0.35) 0%,
+      rgba(255, 230, 195, 0) 55%
+    );
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 420;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-variant-numeric: lining-nums proportional-nums;
+  color: var(--ink);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--sp-4);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 380;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: 450;
+  font-variation-settings: "opsz" 72, "SOFT" 30;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  font-variation-settings: "opsz" 36, "SOFT" 20;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 var(--sp-4);
+  max-width: var(--content);
+  text-wrap: pretty;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--amber);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, var(--amber) 55%, transparent);
+  transition:
+    color var(--t-fast) var(--ease),
+    text-decoration-color var(--t-fast) var(--ease);
+}
+
+a:hover {
+  color: var(--amber-hover);
+  text-decoration-color: var(--amber-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: var(--sp-12) 0;
+}
+
+code,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+::selection {
+  background: var(--apricot);
+  color: var(--ink);
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--linen);
+  padding: var(--sp-3) var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: var(--r-sm);
+}
+
+.skip-link:focus {
+  left: var(--sp-4);
+  top: var(--sp-4);
+  width: auto;
+  height: auto;
+  overflow: visible;
+}
+
+/* Layout primitives */
+.wrap {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.prose {
+  max-width: var(--content);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  color: var(--olive);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  color: var(--olive);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: var(--sp-5);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.eyebrow::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--amber);
+}
+
+/* Section spacing */
+section {
+  padding-block: var(--section-y);
+}
+
+/* Section tint for Projects — a subtle warmer linen */
+.tint-warm {
+  background: var(--linen-warm);
+}
+
+/* Fade-in on load (respect reduced motion handled above) */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: riseIn 900ms var(--ease) both;
+}
+
+.rise-1 { animation-delay: 60ms; }
+.rise-2 { animation-delay: 180ms; }
+.rise-3 { animation-delay: 320ms; }
+.rise-4 { animation-delay: 480ms; }

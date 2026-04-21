@@ -1,0 +1,92 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import a11yLens from "../assets/a11y_lens_promo.png";
+import romcat from "../assets/romcat_labs_logo.png";
+import earthAr from "../assets/earth_ar_classroom.jpg";
+---
+
+<section class="projects tint-warm" aria-labelledby="projects-heading" id="projects">
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">Projects</p>
+      <h2 id="projects-heading">A few things I've&nbsp;made.</h2>
+      <p class="lede prose">
+        Personal projects I'm proudest of.
+      </p>
+    </header>
+
+    <div class="list">
+      <ProjectCard
+        image={a11yLens}
+        alt="A11y Lens logo: a white magnifying glass with a checkmark inside, on a blue rounded square."
+        meta="2026–present · tool"
+        title="A11y Lens"
+        href="https://a11ylens.com/"
+        linkLabel="a11ylens.com"
+        fit="contain"
+        tone="white"
+      >
+        <p>
+          A browser extension that helps developers run accessibility audits and turn the results into shareable reports. It’s built on axe-core and focuses on making issues easier to understand and fix. I built it to make accessibility testing more actionable.
+        </p>
+      </ProjectCard>
+
+      <ProjectCard
+        image={romcat}
+        alt="Romcat Labs logo: a glowing beaker with colorful liquid inside, framed by a stylized cat silhouette."
+        meta="2025–present · studio"
+        title="Romcat Labs"
+        href="https://romcatlabs.com/"
+        linkLabel="romcatlabs.com"
+        fit="contain"
+        tone="black"
+      >
+        <p>
+          A small personal studio for digital experiments. Apps, tools, and anything else I want to explore. It's the primary outlet for shipping whatever I'm currently building.
+        </p>
+      </ProjectCard>
+
+      <ProjectCard
+        image={earthAr}
+        alt="Augmented reality view of a classroom. A large model of Earth floats above the carpet between the desks, showing Europe and Africa, with small pins dropped on its surface and three control icons across the top."
+        meta="2019 · thesis"
+        title="EarthAR"
+        fit="cover"
+      >
+        <p>
+          EarthAR was my master's degree project. A classroom-scale augmented reality app where a teacher spawns a model of the Earth on the floor and students move around it with tablets, exploring continents, oceans, and the planet's interior.
+        </p>
+      </ProjectCard>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects {
+    padding-block: var(--section-y);
+  }
+
+  .head {
+    max-width: var(--content);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .head h2 {
+    margin-bottom: var(--sp-5);
+  }
+
+  .head .lede {
+    font-family: var(--font-display);
+    font-size: var(--fs-lead);
+    font-style: italic;
+    font-weight: 340;
+    font-variation-settings: "opsz" 36;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .list {
+    max-width: 68rem;
+    margin: 0 auto;
+  }
+</style>

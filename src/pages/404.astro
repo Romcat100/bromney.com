@@ -1,0 +1,144 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Page not found · Ben Romney"
+  description="This page isn't here."
+>
+  <main id="main" class="notfound">
+    <div class="wrap inner">
+      <svg class="peak" viewBox="0 0 64 24" aria-hidden="true">
+        <path
+          d="M 0 20 L 10 14 L 14 16 L 24 6 L 32 12 L 42 8 L 52 13 L 64 18"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.25"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+        />
+      </svg>
+
+      <p class="eyebrow">Error · 404</p>
+      <h1>Off the&nbsp;trail.</h1>
+      <p class="lede">The page you're looking for isn't here.</p>
+
+      <p class="home">
+        <a href="/">
+          Back to bromney.com<span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .notfound {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: clamp(4rem, 10vw, 8rem);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Same soft warm halo as the hero, just higher in the composition */
+  .notfound::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto auto;
+    width: 70%;
+    height: 80%;
+    background: radial-gradient(
+      ellipse at 55% 40%,
+      color-mix(in srgb, var(--apricot) 28%, transparent) 0%,
+      transparent 60%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .inner {
+    text-align: center;
+    max-width: 44rem;
+  }
+
+  .peak {
+    width: clamp(120px, 18vw, 200px);
+    height: auto;
+    margin: 0 auto clamp(2rem, 4vw, 3rem);
+    color: color-mix(in srgb, var(--amber) 65%, transparent);
+  }
+
+  .eyebrow {
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    color: var(--olive);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: var(--sp-5);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .eyebrow::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--amber);
+  }
+
+  h1 {
+    font-size: clamp(2.75rem, 1.8rem + 4vw, 4.5rem);
+    font-weight: 340;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin: 0 0 var(--sp-6);
+  }
+
+  .lede {
+    font-family: var(--font-display);
+    font-size: var(--fs-lead);
+    font-style: italic;
+    font-weight: 340;
+    font-variation-settings: "opsz" 36;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 34ch;
+    margin: 0 auto var(--sp-10);
+  }
+
+  .home a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3em;
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--amber);
+    border-bottom: 1px solid color-mix(in srgb, var(--amber) 55%, transparent);
+    text-decoration: none;
+    padding-bottom: 2px;
+  }
+
+  .home a:hover {
+    color: var(--amber-hover);
+    border-bottom-color: var(--amber-hover);
+  }
+
+  .home .arrow {
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .home a:hover .arrow {
+    transform: translateX(3px);
+  }
+</style>

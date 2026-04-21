@@ -1,0 +1,21 @@
+{
+  "name": "bromney.com",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal website for Ben Romney.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.1.1",
+    "@fontsource-variable/jetbrains-mono": "^5.1.1",
+    "@fontsource-variable/newsreader": "^5.1.1",
+    "astro": "^5.0.0",
+    "sharp": "^0.33.5"
+  }
+}

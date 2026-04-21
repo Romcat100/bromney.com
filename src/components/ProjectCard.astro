@@ -1,0 +1,219 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  meta: string;
+  title: string;
+  href?: string;
+  linkLabel?: string;
+  fit?: "cover" | "contain";
+  tone?: "linen" | "warm" | "white" | "black";
+}
+
+const {
+  image,
+  alt,
+  meta,
+  title,
+  href,
+  linkLabel,
+  fit = "cover",
+  tone = "linen",
+} = Astro.props;
+---
+
+<article class={`card card--${fit} card--${tone}`}>
+  <div class="thumb">
+    <Image
+      src={image}
+      alt={alt}
+      widths={[240, 360, 480, 640]}
+      sizes="(max-width: 720px) 100vw, 280px"
+      width={480}
+      height={360}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <div class="body">
+    <p class="meta" aria-hidden="true">{meta}</p>
+    <h3 class="title">
+      {href ? (
+        <a href={href} rel="noopener" class="title-link">{title}<span class="arrow" aria-hidden="true">→</span></a>
+      ) : (
+        <>{title}</>
+      )}
+    </h3>
+    <div class="copy prose">
+      <slot />
+    </div>
+    {href && linkLabel && (
+      <p class="link-row">
+        <a href={href} rel="noopener" class="outlink">
+          {linkLabel}
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </p>
+    )}
+  </div>
+</article>
+
+<style>
+  .card {
+    display: grid;
+    gap: var(--sp-5);
+    grid-template-columns: 1fr;
+    padding-block: var(--sp-10);
+    border-top: 1px solid var(--rule);
+  }
+
+  .card:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  @media (min-width: 680px) {
+    .card {
+      grid-template-columns: 16rem minmax(0, 1fr);
+      gap: clamp(1.75rem, 3vw, 2.5rem);
+      align-items: start;
+    }
+  }
+
+  .thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--r);
+    background: var(--linen-warm);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--amber) 22%, transparent) inset,
+      0 10px 24px -18px rgba(40, 30, 20, 0.3);
+  }
+
+  .card--warm .thumb {
+    background: var(--cream);
+  }
+
+  .card--white .thumb {
+    background: #ffffff;
+  }
+
+  .card--white .thumb :global(img) {
+    padding: 30px;
+  }
+
+  .card--black .thumb {
+    background: #030203;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--amber) 22%, transparent) inset,
+      0 10px 24px -18px rgba(0, 0, 0, 0.55);
+  }
+
+  .thumb :global(img) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .card--cover .thumb :global(img) {
+    object-fit: cover;
+  }
+
+  .card--contain .thumb :global(img) {
+    object-fit: contain;
+  }
+
+  .body {
+    min-width: 0;
+  }
+
+  .meta {
+    color: var(--olive);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin: 0 0 var(--sp-2);
+  }
+
+  .title {
+    font-family: var(--font-body);
+    font-size: clamp(1.5rem, 1.2rem + 0.9vw, 1.875rem);
+    font-weight: 560;
+    font-variation-settings: "opsz" 36;
+    letter-spacing: -0.012em;
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4);
+    color: var(--ink);
+  }
+
+  .title-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    gap: 0.35em;
+    align-items: baseline;
+    transition: color var(--t-fast) var(--ease);
+  }
+
+  .title-link:hover {
+    color: var(--amber-hover);
+  }
+
+  .title-link .arrow {
+    font-family: var(--font-mono);
+    font-size: 0.65em;
+    font-weight: 500;
+    color: var(--amber);
+    transform: translateY(-0.05em);
+    transition: transform var(--t-base) var(--ease), color var(--t-fast) var(--ease);
+  }
+
+  .title-link:hover .arrow {
+    transform: translate(4px, -0.05em);
+    color: var(--amber-hover);
+  }
+
+  .copy {
+    color: var(--ink-soft);
+    line-height: 1.62;
+  }
+
+  .link-row {
+    margin: var(--sp-4) 0 0;
+  }
+
+  .outlink {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35em;
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--amber);
+    border-bottom: 1px solid color-mix(in srgb, var(--amber) 55%, transparent);
+    padding-bottom: 2px;
+  }
+
+  .outlink:hover {
+    color: var(--amber-hover);
+    border-bottom-color: var(--amber-hover);
+  }
+
+  .outlink .arrow {
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .outlink:hover .arrow {
+    transform: translateX(3px);
+  }
+</style>

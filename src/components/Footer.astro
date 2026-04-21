@@ -1,0 +1,49 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <p class="copy">© {year} Ben Romney</p>
+    <svg class="peak" viewBox="0 0 48 16" aria-hidden="true">
+      <path
+        d="M 0 14 L 8 10 L 12 12 L 24 3 L 32 9 L 38 6 L 48 11"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.25"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+    </svg>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: var(--sp-12);
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-6);
+  }
+
+  .copy {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--olive);
+  }
+
+  .peak {
+    width: 56px;
+    height: auto;
+    color: color-mix(in srgb, var(--amber) 70%, transparent);
+  }
+</style>

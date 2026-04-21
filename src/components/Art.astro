@@ -1,0 +1,178 @@
+---
+import { Image } from "astro:assets";
+import mtHood from "../assets/mt_hood.jpg";
+---
+
+<section class="art" aria-labelledby="art-heading" id="art">
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">Paintings</p>
+      <h2 id="art-heading"><em>Mt Hood</em> at sunset.</h2>
+      <p class="lede">
+        I paint the mountains I've lived near. I painted this one in Oregon, in the last minutes of light before the peak turns&nbsp;blue.
+      </p>
+    </header>
+
+    <figure class="art-figure">
+      <div class="art-frame">
+        <Image
+          src={mtHood}
+          alt="Acrylic painting of Mt Hood at sunset. Warm apricot and peach sky above a snow-covered peak that catches alpenglow, with deep blue-violet shadows in the foothills and a silhouetted forest foreground."
+          widths={[640, 960, 1280, 1600, 1920]}
+          sizes="(max-width: 900px) 94vw, 960px"
+          width={1222}
+          height={960}
+          loading="lazy"
+          decoding="async"
+          class="painting"
+        />
+      </div>
+      <figcaption>
+        <span class="caption-title"><em>Mt Hood</em></span>
+        <span class="caption-sep" aria-hidden="true">·</span>
+        <span>acrylic on canvas</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .art {
+    position: relative;
+    background: var(--spruce);
+    color: var(--cream-dim);
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Subtle painterly glow — an apricot halo at the top-left that echoes the
+     painting's warm sky without competing with it. */
+  .art::before {
+    content: "";
+    position: absolute;
+    inset: -25% -10% auto auto;
+    width: 75%;
+    height: 85%;
+    background:
+      radial-gradient(
+        ellipse at 60% 40%,
+        color-mix(in srgb, var(--apricot) 32%, transparent) 0%,
+        transparent 60%
+      );
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .art::after {
+    content: "";
+    position: absolute;
+    inset: auto -10% -30% -15%;
+    width: 80%;
+    height: 70%;
+    background:
+      radial-gradient(
+        ellipse at 40% 60%,
+        color-mix(in srgb, var(--alpenglow) 18%, transparent) 0%,
+        transparent 65%
+      );
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .head {
+    max-width: var(--content);
+    margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+
+  .eyebrow {
+    color: var(--apricot);
+    justify-content: center;
+  }
+
+  :global(.art .eyebrow::before) {
+    background: var(--apricot);
+  }
+
+  .head h2 {
+    color: var(--cream-dim);
+    font-weight: 320;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    letter-spacing: -0.022em;
+    font-size: clamp(2rem, 1.4rem + 2.5vw, 3rem);
+  }
+
+  .head h2 em {
+    font-style: italic;
+    color: var(--apricot);
+  }
+
+  .lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 340;
+    font-variation-settings: "opsz" 36;
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    max-width: 42ch;
+    color: color-mix(in srgb, var(--cream-dim) 85%, transparent);
+    margin: 0 auto;
+  }
+
+  .art-figure {
+    margin: 0 auto;
+    max-width: 64rem;
+    text-align: center;
+  }
+
+  .art-frame {
+    position: relative;
+    padding: clamp(0.75rem, 1.2vw, 1.25rem);
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--apricot) 22%, var(--spruce)),
+      color-mix(in srgb, var(--spruce-soft) 80%, var(--spruce))
+    );
+    border-radius: 2px;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--apricot) 40%, transparent),
+      0 40px 80px -30px rgba(0, 0, 0, 0.7),
+      0 16px 32px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .painting {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1px;
+  }
+
+  figcaption {
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: color-mix(in srgb, var(--cream-dim) 75%, transparent);
+    display: inline-flex;
+    gap: 0.7em;
+    align-items: baseline;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .caption-title em {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 420;
+    font-size: 1.05rem;
+    text-transform: none;
+    letter-spacing: -0.005em;
+    color: var(--apricot);
+  }
+
+  .caption-sep {
+    color: color-mix(in srgb, var(--apricot) 60%, transparent);
+  }
+</style>

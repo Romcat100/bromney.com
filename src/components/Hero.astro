@@ -1,0 +1,234 @@
+---
+import { Image } from "astro:assets";
+import portrait from "../assets/ben_portrait.jpg";
+---
+
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="hero-eyebrow rise rise-1">
+        <span class="dot" aria-hidden="true"></span>
+        40.7608° N · 111.891° W
+      </p>
+      <h1 id="hero-heading" class="rise rise-2">
+        <span class="given">Ben</span>
+        <span class="family">Romney</span>
+      </h1>
+      <p class="hero-lede rise rise-3">
+        I <em>build software</em>, paint mountains, and run trails.
+      </p>
+    </div>
+
+    <figure class="hero-portrait rise rise-2">
+      <div class="portrait-frame">
+        <Image
+          src={portrait}
+          alt="Ben Romney, smiling, outdoors in Utah with blurred green foothills behind him."
+          widths={[280, 420, 560, 840]}
+          sizes="(max-width: 720px) 60vw, 360px"
+          width={560}
+          height={560}
+          loading="eager"
+          fetchpriority="high"
+          class="portrait"
+        />
+      </div>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <hr class="hero-rule" aria-hidden="true" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(3.5rem, 6vw, 6rem) clamp(2rem, 4vw, 3.5rem);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  /* Painterly warm bloom behind the portrait, echoing the Mt Hood sky. */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -8% -8% auto auto;
+    width: 62%;
+    height: 92%;
+    background:
+      radial-gradient(
+        ellipse at 68% 38%,
+        color-mix(in srgb, var(--apricot) 30%, transparent) 0%,
+        color-mix(in srgb, var(--apricot) 10%, transparent) 40%,
+        transparent 70%
+      );
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  /* Fine paper-grain texture, barely visible. Uses fractalNoise so it reads
+     as organic fibre rather than a digital pattern. Multiply keeps it warm. */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.23  0 0 0 0 0.18  0 0 0 0 0.12  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.22'/></svg>");
+    background-size: 220px 220px;
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero::after {
+      opacity: 0.35;
+    }
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+
+  @media (min-width: 760px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: clamp(2.5rem, 5vw, 4rem);
+    }
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    color: var(--olive);
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--sp-6);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--alpenglow);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--apricot) 30%, transparent);
+  }
+
+  h1 {
+    font-size: var(--fs-h1);
+    font-weight: 340;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    letter-spacing: -0.028em;
+    line-height: 0.96;
+    margin: 0 0 var(--sp-8);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15em 0.28em;
+    max-width: 14ch;
+  }
+
+  .given {
+    color: var(--ink);
+  }
+
+  .family {
+    color: var(--ink);
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+
+  .hero-lede {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.625rem);
+    font-weight: 340;
+    font-style: italic;
+    font-variation-settings: "opsz" 48;
+    line-height: 1.6;
+    letter-spacing: -0.008em;
+    color: var(--ink-soft);
+    max-width: 30ch;
+    margin: 0;
+  }
+
+  .hero-lede em {
+    font-style: italic;
+    color: var(--ink);
+    background: linear-gradient(
+      to bottom,
+      transparent 62%,
+      color-mix(in srgb, var(--apricot) 55%, transparent) 62%,
+      color-mix(in srgb, var(--apricot) 55%, transparent) 92%,
+      transparent 92%
+    );
+    padding: 0 0.08em;
+  }
+
+  .hero-portrait {
+    margin: 0;
+    justify-self: center;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  @media (min-width: 760px) {
+    .hero-portrait {
+      justify-self: end;
+    }
+  }
+
+  .portrait-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    padding: 10px;
+    background:
+      radial-gradient(
+        circle at 30% 25%,
+        color-mix(in srgb, var(--apricot) 55%, transparent) 0%,
+        color-mix(in srgb, var(--apricot) 15%, transparent) 35%,
+        transparent 70%
+      );
+  }
+
+  .portrait-frame::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    box-shadow:
+      0 1px 0 0 var(--linen) inset,
+      0 30px 60px -30px rgba(40, 30, 20, 0.25),
+      0 0 0 1px color-mix(in srgb, var(--amber) 30%, transparent);
+    pointer-events: none;
+  }
+
+  .portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .hero-rule {
+    border: 0;
+    height: 1px;
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      color-mix(in srgb, var(--amber) 70%, transparent) 15%,
+      color-mix(in srgb, var(--amber) 70%, transparent) 85%,
+      transparent 100%
+    );
+  }
+</style>

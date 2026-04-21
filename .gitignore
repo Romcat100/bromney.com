@@ -1,0 +1,26 @@
+# build output
+dist/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# os / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# claude code — local-only settings; shared settings.json is fine to commit
+.claude/settings.local.json
+
+# working reference material (source images, screenshots, scratch notes)
+reference/

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Mountain at sunset">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5f1e8"/>
+      <stop offset="0.55" stop-color="#e8a57d"/>
+      <stop offset="1" stop-color="#d87a5a"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="url(#sky)"/>
+  <path d="M 0 26 L 5 22 L 9 24 L 16 13 L 22 19 L 27 16 L 32 21 L 32 32 L 0 32 Z" fill="#141c22"/>
+</svg>

@@ -1,0 +1,63 @@
+---
+---
+
+<section class="writing" aria-labelledby="writing-heading" id="writing">
+  <div class="wrap writing-inner">
+    <p class="eyebrow">Writing</p>
+    <h2 id="writing-heading">Occasional&nbsp;essays.</h2>
+    <p class="writing-line">
+      When I have something worth saying, I put it on <a href="https://substack.com/@benromney1" rel="me noopener">Substack<span class="arrow" aria-hidden="true">→</span></a>.
+    </p>
+  </div>
+</section>
+
+<style>
+  .writing {
+    padding-block: var(--section-y);
+  }
+
+  .writing-inner h2 {
+    margin: 0 0 var(--sp-6);
+    font-weight: 380;
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+  }
+
+  .writing-line {
+    font-family: var(--font-display);
+    font-size: clamp(1.3125rem, 1.1rem + 1vw, 1.625rem);
+    font-weight: 340;
+    font-style: italic;
+    font-variation-settings: "opsz" 48;
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 46ch;
+    margin: 0;
+  }
+
+  .writing-line a {
+    font-style: italic;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25em;
+    color: var(--amber);
+    border-bottom: 1px solid color-mix(in srgb, var(--amber) 55%, transparent);
+    text-decoration: none;
+    padding-bottom: 2px;
+  }
+
+  .writing-line a:hover {
+    color: var(--amber-hover);
+    border-bottom-color: var(--amber-hover);
+  }
+
+  .writing-line .arrow {
+    font-family: var(--font-mono);
+    font-size: 0.65em;
+    font-style: normal;
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .writing-line a:hover .arrow {
+    transform: translateX(3px);
+  }
+</style>

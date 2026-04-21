@@ -1,0 +1,63 @@
+---
+---
+
+<section class="now" aria-labelledby="now-heading" id="now">
+  <div class="wrap now-grid">
+    <div class="now-head">
+      <p class="eyebrow">Currently</p>
+      <h2 id="now-heading">What I'm up&nbsp;to.</h2>
+    </div>
+    <div class="now-body prose">
+      <p class="lede">
+        I'm a senior software engineer at <strong>Qualtrics</strong>, where I work on research tools with a focus on accessibility and thoughtful AI.
+      </p>
+      <p>
+        Outside of work, I spend a lot of time in the mountains, usually trail running with an audiobook. I also paint, meditate, cook plant-based meals, and am learning the cello.
+      </p>
+      <p>
+        Lately I've been looking at how modern AI tooling could help alternative proteins move faster. If that's your world, I'd love to connect.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .now {
+    padding-block: var(--section-y);
+    background: var(--paper);
+  }
+
+  .now-grid {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  @media (min-width: 860px) {
+    .now-grid {
+      grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+  }
+
+  .now-head h2 {
+    margin: 0;
+    font-weight: 380;
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+  }
+
+  .lede {
+    font-family: var(--font-body);
+    font-size: var(--fs-lead);
+    font-weight: 380;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: var(--sp-6);
+  }
+
+  .now-body strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+</style>

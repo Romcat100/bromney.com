@@ -1,0 +1,110 @@
+---
+---
+
+<section class="contact" aria-labelledby="contact-heading" id="contact">
+  <div class="wrap contact-inner">
+    <p class="eyebrow">Get in touch</p>
+    <h2 id="contact-heading">Say hello.</h2>
+    <p class="lede">
+      The easiest place to reach me is LinkedIn. I read everything that comes in.
+    </p>
+
+    <a href="https://www.linkedin.com/in/bromney/" class="contact-button" rel="me noopener">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+        <path
+          fill="currentColor"
+          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+        />
+      </svg>
+      <span>linkedin.com/in/bromney</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-block: var(--section-y);
+  }
+
+  .contact-inner {
+    text-align: center;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+
+  .contact .eyebrow {
+    justify-content: center;
+  }
+
+  :global(.contact .eyebrow::before) {
+    background: var(--amber);
+  }
+
+  .contact h2 {
+    font-weight: 340;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 1.6rem + 2vw, 2.75rem);
+    margin-bottom: var(--sp-4);
+  }
+
+  .lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 340;
+    font-variation-settings: "opsz" 36;
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 auto var(--sp-8);
+    max-width: 36ch;
+  }
+
+  .contact-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-4) var(--sp-6);
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid color-mix(in srgb, var(--amber) 50%, transparent);
+    border-radius: var(--r);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+      0 14px 28px -18px rgba(40, 30, 20, 0.35);
+    transition:
+      transform var(--t-base) var(--ease),
+      box-shadow var(--t-base) var(--ease),
+      border-color var(--t-fast) var(--ease),
+      color var(--t-fast) var(--ease);
+  }
+
+  .contact-button:hover {
+    transform: translateY(-1px);
+    border-color: var(--amber);
+    color: var(--amber-hover);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+      0 20px 32px -18px rgba(40, 30, 20, 0.4);
+  }
+
+  .contact-button svg {
+    color: var(--amber);
+    flex-shrink: 0;
+  }
+
+  .contact-button .arrow {
+    color: var(--amber);
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .contact-button:hover .arrow {
+    transform: translateX(3px);
+  }
+</style>
