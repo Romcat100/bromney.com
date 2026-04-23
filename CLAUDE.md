@@ -72,7 +72,7 @@ will block it at runtime. The cache rules in the same file give hashed
 - **Aesthetic:** Plein Air. Foothills (linen, sage, olive) as the everyday
   read; Alpenglow (apricot, spruce) as punctuation around the Art section
 - **Palette:** defined in `src/styles/tokens.css`. `--linen` is the body bg.
-  The Now and Contact sections use `--paper` (white) for contrast. The Art
+  The Now and Contact sections use `--paper` (off-white) for contrast. The Art
   section uses `--spruce` (dark). Projects and Values use `--linen-warm`
 - **Typography:**
   - Display — `Fraunces Variable` (warm serif, expressive optical size)
@@ -153,7 +153,7 @@ trusting dev.
 - Blog/RSS/CMS
 - Trackers or analytics, ever
 - SaaS-template aesthetic
-- Pure white everywhere (the site should feel warm; white is a contrast
+- Paper white everywhere (the site should feel warm; paper is a contrast
   device, not the base)
 - Adding a contact form or email address to the Contact section — LinkedIn
   is the only channel there

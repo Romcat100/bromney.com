@@ -10,7 +10,7 @@ interface Props {
   href?: string;
   linkLabel?: string;
   fit?: "cover" | "contain";
-  tone?: "linen" | "warm" | "white" | "black";
+  tone?: "linen" | "warm" | "paper" | "black";
 }
 
 const {
@@ -100,11 +100,11 @@ const {
     background: var(--cream);
   }
 
-  .card--white .thumb {
-    background: #ffffff;
+  .card--paper .thumb {
+    background: var(--paper);
   }
 
-  .card--white .thumb :global(img) {
+  .card--paper .thumb :global(img) {
     padding: 30px;
   }
 
