@@ -4,11 +4,13 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "Ben Romney",
-  description = "I build software, paint mountains, and run trails.",
+  description = "I build software, paint mountains, and want this century to go well for everyone in it.",
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://bromney.com").toString();
@@ -24,6 +26,7 @@ const ogImage = "https://bromney.com/og_card.jpg";
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
 
     <meta property="og:type" content="website" />
@@ -43,7 +46,7 @@ const ogImage = "https://bromney.com/og_card.jpg";
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content="Acrylic painting of Mt Hood at sunset." />
 
-    <meta name="theme-color" content="#f5f1e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#141c22" media="(prefers-color-scheme: dark)" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

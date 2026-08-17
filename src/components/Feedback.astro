@@ -1,0 +1,168 @@
+---
+---
+
+<section class="feedback" aria-labelledby="feedback-heading" id="feedback">
+  <div class="wrap feedback-grid">
+    <div class="feedback-head">
+      <p class="eyebrow">Feedback</p>
+      <h2 id="feedback-heading">Tell me something I should&nbsp;hear.</h2>
+    </div>
+
+    <div class="feedback-body prose">
+      <p class="lede">
+        This form is completely anonymous unless you choose to include your contact details.
+      </p>
+
+      <form method="post" action="/api/feedback">
+        <div class="field">
+          <label for="fb-message">Your feedback</label>
+          <textarea id="fb-message" name="message" required maxlength="5000" rows="6"></textarea>
+        </div>
+
+        <div class="nectar">
+          <label for="fb-website">Leave this field blank</label>
+          <input type="text" id="fb-website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button type="submit" class="submit">
+          <span>Send feedback</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feedback {
+    padding-block: var(--section-y);
+    background: var(--paper);
+  }
+
+  .feedback-grid {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  @media (min-width: 860px) {
+    .feedback-grid {
+      grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+  }
+
+  .feedback-head h2 {
+    margin: 0;
+    font-weight: 380;
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+  }
+
+  .lede {
+    font-family: var(--font-body);
+    font-size: var(--fs-lead);
+    font-weight: 380;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: var(--sp-8);
+  }
+
+  form {
+    max-width: var(--content);
+  }
+
+  .field {
+    margin-bottom: var(--sp-5);
+  }
+
+  label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    color: var(--olive);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--sp-2);
+  }
+
+  textarea,
+  input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-sm);
+    padding: var(--sp-3) var(--sp-4);
+    transition: border-color var(--t-fast) var(--ease);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  textarea:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 1px;
+    border-color: var(--amber);
+  }
+
+  /* Honeypot: off-screen but not display:none, so bots still fill it while
+     people using screen readers hear the "leave blank" label. */
+  .nectar {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .submit {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-4) var(--sp-6);
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid color-mix(in srgb, var(--amber) 50%, transparent);
+    border-radius: var(--r);
+    cursor: pointer;
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+      0 14px 28px -18px rgba(40, 30, 20, 0.35);
+    transition:
+      transform var(--t-base) var(--ease),
+      box-shadow var(--t-base) var(--ease),
+      border-color var(--t-fast) var(--ease),
+      color var(--t-fast) var(--ease);
+  }
+
+  .submit:hover {
+    transform: translateY(-1px);
+    border-color: var(--amber);
+    color: var(--amber-hover);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+      0 20px 32px -18px rgba(40, 30, 20, 0.4);
+  }
+
+  .submit .arrow {
+    color: var(--amber);
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .submit:hover .arrow {
+    transform: translateX(3px);
+  }
+</style>

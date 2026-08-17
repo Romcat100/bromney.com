@@ -1,17 +1,15 @@
-/* Plein Air — design tokens */
+/* Plein Air — design tokens (second pass: a touch less brown than v1) */
 
 :root {
   /* Color — Foothills everyday palette */
   --paper: #fdfcf9;
-  --linen: #f5f1e8;
-  --linen-warm: #ece5d2;
-  --cream: #faf6ec;
-  --sage-light: #c6ccbc;
-  --sage: #a8b0a0;
+  --linen: #f6f3ec;
+  --linen-warm: #ede8db;
+  --cream: #faf7f0;
   --olive: #585c46;
   --ink: #2a2c28;
   --ink-soft: #585b52;
-  --rule: #d8d0bf;
+  --rule: #dad4c7;
 
   /* Color — Alpenglow accents (used sparingly) */
   --amber: #7e5620;

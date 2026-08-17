@@ -17,5 +17,8 @@
     "@fontsource-variable/newsreader": "^5.1.1",
     "astro": "^5.0.0",
     "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260817.1"
   }
 }

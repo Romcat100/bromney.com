@@ -7,10 +7,14 @@ node_modules/
 # astro
 .astro/
 
+# wrangler local dev cache
+.wrangler/
+
 # env
 .env
 .env.local
 .env.*.local
+.dev.vars
 
 # os / editor
 .DS_Store

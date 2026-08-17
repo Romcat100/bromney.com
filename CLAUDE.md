@@ -1,7 +1,8 @@
 # Guidance for agents working on bromney.com
 
-This repo is a personal website — one page, set-and-forget, Astro static
-output. Read this before touching code.
+This repo is a personal website — one main page plus a 404 and a small
+form-confirmation page, set-and-forget, Astro static output with one
+Cloudflare Pages Function. Read this before touching code.
 
 ## The non-obvious stuff
 
@@ -25,13 +26,26 @@ fall back to a plain default, so keep it in place. The page reuses
 `Base.astro`, owns its own `<main id="main">` for the skip link, and keeps
 the Plein Air palette so it reads as part of the site.
 
+**The feedback form is the only server-side code.**
+`functions/api/feedback.ts` is a Cloudflare Pages Function (Pages picks up
+`functions/` automatically alongside the static `dist`; no Astro adapter).
+It forwards submissions from the Feedback section to Ben's inbox via the
+Resend API. Two env vars are set in the Pages dashboard, NOT in the repo:
+`RESEND_API_KEY` (secret) and `FEEDBACK_TO` (the destination address).
+Ben's email address must never appear in the repo or in client code. Spam
+defense is a honeypot field (`website`), a same-origin check, and length
+bounds; every outcome 303-redirects to `/thanks` so bots learn nothing.
+Test locally with `npx wrangler pages dev dist` plus a gitignored
+`.dev.vars` file holding the two vars.
+
 **Security headers live in `public/_headers`.** Cloudflare Pages reads that
 file and applies the listed headers to every response. The CSP is
-deliberately tight — same-origin only, no external hosts. If a future
-change needs an external asset (a hosted font, a Substack widget, any
-iframe), the CSP in `_headers` must be loosened to match, or the browser
-will block it at runtime. The cache rules in the same file give hashed
-`/_astro/*` assets `immutable` and HTML files `must-revalidate`.
+deliberately tight — same-origin only, no external hosts; `form-action` is
+`'self'` for the feedback form. If a future change needs an external asset
+(a hosted font, any iframe), the CSP in `_headers` must be loosened to
+match, or the browser will block it at runtime. The cache rules in the same
+file give hashed `/_astro/*` assets `immutable` and HTML files
+`must-revalidate`.
 
 ## Hard design rules
 
@@ -45,18 +59,22 @@ will block it at runtime. The cache rules in the same file give hashed
   decorative. Respect keyboard nav, focus rings, landmarks, `alt` text,
   `prefers-reduced-motion`, and AA contrast minimums
 - **No JS dependency for viewing.** The site must work with JavaScript
-  disabled. No hydrated islands. No client directives
-- **No trackers, no analytics, no third-party embeds.** Not now, not later
+  disabled. No hydrated islands. No client directives. The feedback form is
+  a plain HTML POST for this reason
+- **No trackers, no analytics, no third-party embeds.** Not now, not later.
+  (Resend is called server-side only; nothing third-party loads in the page)
 
 ## Hard stack rules
 
 - **No Tailwind.** Vanilla CSS + design tokens in `src/styles/tokens.css`
 - **No JS frameworks beyond Astro.** No React, Vue, Svelte, Alpine, htmx
 - **No CMS, no RSS feed, no blog, no scheduled content.** Set-and-forget is
-  the point. If Ben wants a blog, he has Substack
+  the point
 - **Self-host fonts.** No Google Fonts CDN at runtime. Fonts come through
   `@fontsource-variable` npm packages
-- **Single page.** No routing, no sub-pages. Everything is `src/pages/index.astro`
+- **One main page.** Everything lives on `src/pages/index.astro`; the only
+  other pages are `404.astro` and `thanks.astro` (feedback confirmation,
+  noindex). No blog or sub-content pages
 
 ## Code style
 
@@ -69,11 +87,13 @@ will block it at runtime. The cache rules in the same file give hashed
 
 ## Design system at a glance
 
-- **Aesthetic:** Plein Air. Foothills (linen, sage, olive) as the everyday
-  read; Alpenglow (apricot, spruce) as punctuation around the Art section
+- **Aesthetic:** Plein Air, second pass. Foothills (linen, olive) as the
+  everyday read, deliberately a touch less brown than v1; Alpenglow
+  (apricot, spruce) as punctuation around the Art section. Ben tried a cool
+  blue "Civic Frost" theme in Aug 2026 and rejected it; don't drift cool
 - **Palette:** defined in `src/styles/tokens.css`. `--linen` is the body bg.
-  The Now and Contact sections use `--paper` (off-white) for contrast. The Art
-  section uses `--spruce` (dark). Projects and Values use `--linen-warm`
+  The Now and Feedback sections use `--paper` for contrast. The Art section
+  uses `--spruce` (dark). Projects and Values use `--linen-warm`
 - **Typography:**
   - Display — `Fraunces Variable` (warm serif, expressive optical size)
   - Body — `Newsreader Variable` (editorial serif, clear digits)
@@ -82,41 +102,47 @@ will block it at runtime. The cache rules in the same file give hashed
     expose `lnum` (lining-nums). If a display title contains digits, render
     it in Newsreader — the "1"s in Fraunces oldstyle are indistinguishable
     from lowercase "l". `ProjectCard.astro` uses Newsreader for this reason
-- **Accent:** `--amber` (deep warm bronze) for links. Apricot highlight on a
-  single phrase in the hero lede and the Values opening. Used sparingly on
-  purpose. The current `--amber` and `--olive` values are tuned so 12–15px
-  text passes WCAG AA (≥4.5:1) on every background they appear on (`--paper`,
-  `--linen`, `--linen-warm`). Don't lighten either back toward the old dusty
-  gold / muted olive without re-checking contrast on all three backgrounds
+- **Accent:** `--amber` (deep warm bronze) for links and focus rings.
+  Apricot highlight on a single phrase in the hero lede. Used sparingly on
+  purpose. `--amber` and `--olive` are tuned so 12–15px text passes WCAG AA
+  (≥4.5:1) on every background they appear on (`--paper`, `--linen`,
+  `--linen-warm`, `--cream`). Don't lighten either back toward the old dusty
+  gold / muted olive without re-checking contrast on all those backgrounds
+- **Motif:** the footer and 404 carry a small step/square-wave polyline
+  (a quiet signal-trace mark), not the old mountain ridgeline. The mountain
+  survives in the favicon only
 
 ## Where things live
 
 ```
-src/pages/index.astro          single entry, composes all sections
-src/pages/404.astro            "Off the trail." error page (builds to 404.html)
+src/pages/index.astro          single main entry, composes all sections
+src/pages/404.astro            "Nothing at this address." error page
+src/pages/thanks.astro         feedback confirmation (noindex)
 src/layouts/Base.astro         <head>, meta tags, OG/Twitter, fonts, skip link
 src/components/
-  Hero.astro                   eyebrow, name, one-liner, portrait
-  Now.astro                    what Ben's up to + theory of change
+  Hero.astro                   eyebrow (DC coords), name, one-liner, portrait
+  Now.astro                    Horizon Institute role + interests
   Projects.astro               calls ProjectCard 3x (A11y Lens, Romcat, EarthAR)
   ProjectCard.astro            thumbnail + text block
   Art.astro                    Mt Hood painting feature (spruce bg)
-  Writing.astro                Substack link
   Values.astro                 what Ben cares about
+  Feedback.astro               anonymous feedback form (posts to /api/feedback)
   Contact.astro                LinkedIn-only contact
-  Footer.astro                 copyright + peak silhouette
+  Footer.astro                 copyright + signal-trace mark
+functions/api/feedback.ts      Pages Function: form → Resend → inbox
 src/styles/tokens.css          design tokens
 src/styles/global.css          resets, base element styles, utilities
 src/assets/                    images processed by <Image />
-public/                        passthrough (favicon, og_card, robots.txt)
+public/                        passthrough (favicon, og_card, robots.txt, _headers)
 ```
 
 ## Commands
 
 ```bash
-npm run dev      # localhost:4321
+npm run dev      # localhost:4321 (static site only; no functions)
 npm run build    # writes to dist/
-npm run preview  # serves the built site locally
+npm run preview  # serves the built site locally (no functions)
+npx wrangler pages dev dist   # built site + the feedback function (.dev.vars)
 ```
 
 Deploys happen automatically on push to `master` via Cloudflare Pages.
@@ -144,6 +170,8 @@ trusting dev.
 - Changing visual treatment (colors, spacing, type) when it serves the vibe
 - Adding new images to `reference/` and wiring them in
 - Tightening the A11y story
+- The anonymous Feedback form (Ben requested it himself). It stays; the
+  email address stays out of the repo
 - Adding further sections in the future, *if Ben asks*. Don't grow the page
   unprompted
 
@@ -153,14 +181,13 @@ trusting dev.
 - Blog/RSS/CMS
 - Trackers or analytics, ever
 - SaaS-template aesthetic
-- Paper white everywhere (the site should feel warm; paper is a contrast
-  device, not the base)
-- Adding a contact form or email address to the Contact section — LinkedIn
-  is the only channel there
+- Paper white everywhere (paper is a contrast device, not the base)
+- Adding an email address anywhere user-visible — LinkedIn is the only named
+  channel in Contact, and feedback goes through the form
 
 ## Memory pointers
 
 Ben's personal details, preferences, and the stack's load-bearing quirks are
 saved under
-`~/.claude/projects/C--Users-Ben-Documents-Websites-bromney-com/memory/`.
+`~/.claude/projects/C--Users-romne-Code-bromney-com/memory/`.
 Update those alongside this file when something durable changes.

@@ -45,7 +45,7 @@ body {
   background-image:
     radial-gradient(
       ellipse at 50% 0%,
-      rgba(255, 230, 195, 0.35) 0%,
+      rgba(255, 230, 195, 0.28) 0%,
       rgba(255, 230, 195, 0) 55%
     );
 }

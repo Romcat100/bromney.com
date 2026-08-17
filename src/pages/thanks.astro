@@ -3,25 +3,15 @@ import Base from "../layouts/Base.astro";
 ---
 
 <Base
-  title="Page not found · Ben Romney"
-  description="This page isn't here."
+  title="Thanks · Ben Romney"
+  description="Message received."
+  noindex
 >
-  <main id="main" class="notfound">
+  <main id="main" class="thanks">
     <div class="wrap inner">
-      <svg class="mark" viewBox="0 0 64 24" aria-hidden="true">
-        <path
-          d="M 0 17 H 12 V 7 H 28 V 17 H 40 V 7 H 64"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.25"
-          stroke-linejoin="miter"
-          stroke-linecap="butt"
-        />
-      </svg>
-
-      <p class="eyebrow">Error · 404</p>
-      <h1>Nothing at this&nbsp;address.</h1>
-      <p class="lede">The page you're looking for isn't here.</p>
+      <p class="eyebrow">Feedback</p>
+      <h1>Got it. Thank&nbsp;you.</h1>
+      <p class="lede">Your note is on its way to me. If you left an email, I'll reply.</p>
 
       <p class="home">
         <a href="/">
@@ -33,7 +23,7 @@ import Base from "../layouts/Base.astro";
 </Base>
 
 <style>
-  .notfound {
+  .thanks {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -44,8 +34,7 @@ import Base from "../layouts/Base.astro";
     isolation: isolate;
   }
 
-  /* Same soft cool halo as the hero, just higher in the composition */
-  .notfound::before {
+  .thanks::before {
     content: "";
     position: absolute;
     inset: -20% -10% auto auto;
@@ -63,13 +52,6 @@ import Base from "../layouts/Base.astro";
   .inner {
     text-align: center;
     max-width: 44rem;
-  }
-
-  .mark {
-    width: clamp(120px, 18vw, 200px);
-    height: auto;
-    margin: 0 auto clamp(2rem, 4vw, 3rem);
-    color: color-mix(in srgb, var(--amber) 65%, transparent);
   }
 
   .eyebrow {
