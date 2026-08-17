@@ -116,7 +116,7 @@ file give hashed `/_astro/*` assets `immutable` and HTML files
 
 ```
 src/pages/index.astro          single main entry, composes all sections
-src/pages/404.astro            "Nothing at this address." error page
+src/pages/404.astro            "Off the trail." error page (builds to 404.html)
 src/pages/thanks.astro         feedback confirmation (noindex)
 src/layouts/Base.astro         <head>, meta tags, OG/Twitter, fonts, skip link
 src/components/
