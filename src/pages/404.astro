@@ -8,7 +8,7 @@ import Base from "../layouts/Base.astro";
 >
   <main id="main" class="notfound">
     <div class="wrap inner">
-      <svg class="mark" viewBox="0 0 64 24" aria-hidden="true">
+      <svg class="peak" viewBox="0 0 64 24" aria-hidden="true">
         <path
           d="M 0 20 L 10 14 L 14 16 L 24 6 L 32 12 L 42 8 L 52 13 L 64 18"
           fill="none"
@@ -44,7 +44,7 @@ import Base from "../layouts/Base.astro";
     isolation: isolate;
   }
 
-  /* Same soft cool halo as the hero, just higher in the composition */
+  /* Same soft warm halo as the hero, just higher in the composition */
   .notfound::before {
     content: "";
     position: absolute;
@@ -65,7 +65,7 @@ import Base from "../layouts/Base.astro";
     max-width: 44rem;
   }
 
-  .mark {
+  .peak {
     width: clamp(120px, 18vw, 200px);
     height: auto;
     margin: 0 auto clamp(2rem, 4vw, 3rem);
