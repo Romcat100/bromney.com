@@ -108,9 +108,9 @@ file give hashed `/_astro/*` assets `immutable` and HTML files
   (≥4.5:1) on every background they appear on (`--paper`, `--linen`,
   `--linen-warm`, `--cream`). Don't lighten either back toward the old dusty
   gold / muted olive without re-checking contrast on all those backgrounds
-- **Motif:** the footer and 404 carry a small step/square-wave polyline
-  (a quiet signal-trace mark), not the old mountain ridgeline. The mountain
-  survives in the favicon only
+- **Motif:** the footer and 404 carry a small mountain-ridgeline polyline,
+  echoing the favicon. Ben kept it on purpose after the DC move; it reads
+  as landscape, not as a trail-running reference
 
 ## Where things live
 
@@ -128,7 +128,7 @@ src/components/
   Values.astro                 what Ben cares about
   Feedback.astro               anonymous feedback form (posts to /api/feedback)
   Contact.astro                LinkedIn-only contact
-  Footer.astro                 copyright + signal-trace mark
+  Footer.astro                 copyright + peak silhouette
 functions/api/feedback.ts      Pages Function: form → Resend → inbox
 src/styles/tokens.css          design tokens
 src/styles/global.css          resets, base element styles, utilities
