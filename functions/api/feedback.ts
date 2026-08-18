@@ -15,17 +15,24 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const redirect = () =>
     new Response(null, { status: 303, headers: { Location: "/thanks/" } });
 
-  // Same-origin check that also holds on *.pages.dev preview deploys.
-  const origin = request.headers.get("origin") ?? "";
-  if (origin && origin !== new URL(request.url).origin) return redirect();
+  // Strict same-origin check that also holds on *.pages.dev preview deploys.
+  // Browsers always send Origin on form POSTs; a missing header means a
+  // scripted request that never loaded the page, so it is rejected too.
+  const origin = request.headers.get("origin");
+  if (origin !== new URL(request.url).origin) return redirect();
 
   const form = await request.formData().catch(() => null);
   if (!form) return redirect();
 
   const message = String(form.get("message") ?? "").trim();
-  const honeypot = String(form.get("website") ?? "");
 
-  if (honeypot !== "" || message.length < 2 || message.length > 5000) {
+  // The honeypot must be present (proof the real form was loaded) and empty
+  // (proof a human filled it out).
+  if (!form.has("website") || String(form.get("website")) !== "") {
+    return redirect();
+  }
+
+  if (message.length < 2 || message.length > 5000) {
     return redirect();
   }
 
