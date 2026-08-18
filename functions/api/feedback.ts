@@ -6,6 +6,14 @@
 // dropped silently so bots learn nothing, and real delivery errors are
 // visible in the Pages function logs.
 
+// A per-message subject keeps Gmail from threading every submission into one
+// conversation, and the excerpt makes the inbox scannable.
+const subjectFor = (message: string) => {
+  const oneLine = message.replace(/\s+/g, " ").trim();
+  const excerpt = oneLine.length > 60 ? `${oneLine.slice(0, 59)}…` : oneLine;
+  return `bromney.com feedback: ${excerpt}`;
+};
+
 interface Env {
   RESEND_API_KEY: string;
   FEEDBACK_TO: string;
@@ -45,7 +53,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     body: JSON.stringify({
       from: "Feedback <feedback@bromney.com>",
       to: [env.FEEDBACK_TO],
-      subject: "bromney.com feedback",
+      subject: subjectFor(message),
       text: message,
     }),
   }).catch((err) => {
