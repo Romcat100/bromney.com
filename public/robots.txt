@@ -1,4 +1,10 @@
+# Content signals (contentsignals.org): search indexing and AI reading or
+# citing this site are welcome; using its content to train models is not.
+# The ai-train=no signal is an express reservation of rights under Article 4
+# of EU Directive 2019/790.
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 Disallow: /thanks
 Disallow: /api/
