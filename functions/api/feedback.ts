@@ -6,6 +6,27 @@
 // dropped silently so bots learn nothing, and real delivery errors are
 // visible in the Pages function logs.
 
+// SEO outreach spam slips past the origin and honeypot checks because it is
+// submitted through a real browser session. Its vocabulary is stereotyped
+// enough to filter on: no genuine note about a personal site talks about
+// backlinks or link exchanges. Link-stuffed messages (3+ URLs) are dropped for
+// the same reason; a single shared link (say, a book recommendation) still
+// gets through.
+const SPAM_PHRASES = [
+  /\bbacklinks?\b/i,
+  /\blink exchange\b/i,
+  /\blink.?building\b/i,
+  /\bguest posts?\b/i,
+  /\bseo\b/i,
+  /\bdomain rating\b/i,
+  /\bDR ?[1-9]\d\+?\b/,
+];
+
+const looksLikeSpam = (message: string) => {
+  const linkCount = (message.match(/https?:\/\/|\bwww\./gi) ?? []).length;
+  return linkCount >= 3 || SPAM_PHRASES.some((re) => re.test(message));
+};
+
 // A per-message subject keeps Gmail from threading every submission into one
 // conversation, and the excerpt makes the inbox scannable.
 const subjectFor = (message: string) => {
@@ -41,6 +62,12 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   if (message.length < 2 || message.length > 5000) {
+    return redirect();
+  }
+
+  if (looksLikeSpam(message)) {
+    // Logged (not delivered) so misfires are auditable in the Pages logs.
+    console.log("Dropped as spam:", message.slice(0, 200));
     return redirect();
   }
 
